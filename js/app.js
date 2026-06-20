@@ -96,58 +96,125 @@ function showTab(id){
     }
     
     function renderNow(){
-    
-    const now=document
-    .getElementById("now");
-    
-    const date=new Date();
-    
-    const current=
-    date.getHours()*60+
-    date.getMinutes();
-    
-    let html="";
-    
-    EVENTS.forEach(e=>{
-    
-    const start=e.time
-    .match(/\d\d:\d\d/);
-    
-    if(!start) return;
-    
-    const [h,m]=start[0]
-    .split(':')
-    .map(Number);
-    
-    const mins=h*60+m;
-    
-    if(
-    mins>=current &&
-    mins<=current+30
-    ){
-    
-    html+=`
-    <div class="card">
-    
-    <div class="time">
-    ${e.time}
-    </div>
-    
-    <div class="tent">
-    Шатёр ${e.tent}
-    ${e.location}
-    </div>
-    
-    <h3>${e.title}</h3>
-    
-    </div>
-    `;
-    }
-    
-    });
-    
-    now.innerHTML=html;
-    }
+
+ const nowEl=document.getElementById("now");
+
+ const d=new Date();
+
+ const current=
+ d.getHours()*60+
+ d.getMinutes();
+
+ let activeHtml="";
+ let upcoming=[];
+
+ EVENTS.forEach(e=>{
+
+   const match=
+   e.time.match(
+     /(\d\d:\d\d).*?(\d\d:\d\d)/
+   );
+
+   if(!match) return;
+
+   const [sh,sm]=
+   match[1].split(":").map(Number);
+
+   const [eh,em]=
+   match[2].split(":").map(Number);
+
+   const start=sh*60+sm;
+   const end=eh*60+em;
+
+   if(
+      current>=start &&
+      current<=end
+   ){
+
+      const left=end-current;
+
+      activeHtml+=`
+
+      <div class="card">
+
+      <div class="time">
+      🟢 Осталось ${left} мин
+      </div>
+
+      <div class="tent">
+      Шатёр ${e.tent}
+      · ${e.location}
+      </div>
+
+      <h3>${e.title}</h3>
+
+      <small>${e.time}</small>
+
+      </div>
+      `;
+   }
+
+   if(start>current){
+
+      upcoming.push({
+         ...e,
+         start,
+         delta:start-current
+      });
+
+   }
+
+ });
+
+ upcoming.sort(
+   (a,b)=>a.delta-b.delta
+ );
+
+ let upcomingHtml="";
+
+ upcoming
+ .slice(0,10)
+ .forEach(e=>{
+
+   upcomingHtml+=`
+
+   <div class="card">
+
+   <div class="time">
+   ⏰ Через ${e.delta} мин
+   </div>
+
+   <div class="tent">
+   Шатёр ${e.tent}
+   · ${e.location}
+   </div>
+
+   <h3>${e.title}</h3>
+
+   <small>${e.time}</small>
+
+   </div>
+   `;
+
+ });
+
+ nowEl.innerHTML=`
+
+ <h2 style="padding:12px">
+ 🟢 Сейчас идут
+ </h2>
+
+ ${activeHtml ||
+ "<div class='card'>Нет активных событий</div>"}
+
+ <h2 style="padding:12px">
+ ⏰ Начнётся скоро
+ </h2>
+
+ ${upcomingHtml}
+
+ `;
+}
     
     function initFilters(){
     
@@ -183,4 +250,9 @@ function showTab(id){
     document
     .getElementById("search")
     .oninput=renderEvents;
+
+    setInterval(
+ renderNow,
+ 60000
+);
     }
