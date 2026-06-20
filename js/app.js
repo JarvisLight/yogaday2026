@@ -154,15 +154,15 @@ function showTab(id){
       `;
    }
 
-   if(start>current){
+   if(start > current && start <= current + 30){
 
-      upcoming.push({
-         ...e,
-         start,
-         delta:start-current
-      });
+  upcoming.push({
+     ...e,
+     start,
+     delta:start-current
+  });
 
-   }
+}
 
  });
 
