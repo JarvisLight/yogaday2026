@@ -1,1 +1,76 @@
-
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    }
+    
+    body{
+    font-family:system-ui;
+    background:#f7f7fb;
+    padding-bottom:80px;
+    }
+    
+    header{
+    background:#6C63FF;
+    color:white;
+    padding:20px;
+    text-align:center;
+    }
+    
+    .tabs{
+    display:flex;
+    position:sticky;
+    top:0;
+    background:white;
+    z-index:10;
+    }
+    
+    .tabs button{
+    flex:1;
+    padding:16px;
+    border:none;
+    background:white;
+    font-size:16px;
+    }
+    
+    .card{
+    background:white;
+    margin:12px;
+    padding:16px;
+    border-radius:16px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    }
+    
+    .time{
+    color:#6C63FF;
+    font-weight:bold;
+    }
+    
+    .tent{
+    margin-top:4px;
+    font-size:14px;
+    color:#777;
+    }
+    
+    .hidden{
+    display:none;
+    }
+    
+    .toolbar{
+    padding:10px;
+    display:flex;
+    gap:8px;
+    }
+    
+    input,select{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    width:100%;
+    }
+    
+    .star{
+    font-size:24px;
+    cursor:pointer;
+    float:right;
+    }
