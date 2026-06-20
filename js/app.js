@@ -251,8 +251,9 @@ function showTab(id){
     .getElementById("search")
     .oninput=renderEvents;
 
-    setInterval(
+    
+    }
+setInterval(
  renderNow,
  60000
 );
-    }
