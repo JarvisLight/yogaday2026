@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
+<title>Yoga Day 2026</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+
+<meta name="theme-color" content="#6C63FF">
+</head>
+
+<body>
+
+<header>
+<h1>🧘 Yoga Day 2026</h1>
+</header>
+
+<nav class="tabs">
+<button onclick="showTab('now')">Сейчас</button>
+<button onclick="showTab('schedule')">Расписание</button>
+<button onclick="showTab('favorites')">⭐</button>
+</nav>
+
+<section id="now"></section>
+
+<section id="schedule" class="hidden">
+
+<div class="toolbar">
+
+<input
+id="search"
+placeholder="Поиск">
+
+<select id="tentFilter">
+<option value="">Все шатры</option>
+</select>
+
+</div>
+
+<div id="events"></div>
+
+</section>
+
+<section id="favorites" class="hidden">
+<div id="favoritesList"></div>
+</section>
+
+<script src="js/favorites.js"></script>
+<script src="js/schedule.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
