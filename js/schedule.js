@@ -17,11 +17,13 @@ return{
     time:cols[0]?.trim(),
     tent:cols[1]?.trim(),
     location:cols[2]?.trim(),
-    title:(cols[3] || "")
-  .replace(/\u00A0/g," ")
-  .replaceAll("&nbsp;"," ")
-  .replaceAll('"',"")
-  .replace(/\s+/g," ")
+    title: (cols[3] || "")
+  .replaceAll("&nbsp;", " ")
+  .replaceAll("\u00A0", " ")
+  .replaceAll("&quot;", '"')
+  .replaceAll("&#39;", "'")
+  .replaceAll('"', "")
+  .replace(/\s+/g, " ")
   .trim()
    };
 
